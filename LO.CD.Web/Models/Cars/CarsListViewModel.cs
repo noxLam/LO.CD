@@ -12,5 +12,6 @@ namespace LO.CD.Web.Models.Cars
         
         public string Mileage { get; set; }
         public double Price { get; set; }
+        public KnownColor Color { get; set; }
     }
 }

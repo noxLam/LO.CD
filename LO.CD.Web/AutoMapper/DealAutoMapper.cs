@@ -10,6 +10,7 @@ namespace LO.CD.Web.AutoMapper
         {
             CreateMap<Deal, DealsListViewModel>();
             CreateMap<DealViewModel, Deal>().ReverseMap();
+            CreateMap<DealEditViewModel, Deal>().ReverseMap();
         }
     }
 }

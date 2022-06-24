@@ -43,6 +43,8 @@ namespace LO.CD.Web.Controllers
             var customer = await _context
                                      .Customers
                                      .Include(customer => customer.Deals)
+                                     
+                                     
                                      .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {

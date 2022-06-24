@@ -23,6 +23,15 @@ namespace LO.CD.Entities
 
         public List<Deal> Deals { get; set; }
 
+       /* [NotMapped]
+        public string CustomerFullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        } */
+
         [NotMapped]
         public int Age
         {

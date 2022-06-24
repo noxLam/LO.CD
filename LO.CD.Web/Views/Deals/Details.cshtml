@@ -1,4 +1,4 @@
-﻿@model LO.CD.Entities.Deal
+﻿@model LO.CD.Web.Models.Deals.DealViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -23,16 +23,16 @@
             @Html.DisplayFor(model => model.PaymentMethod)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Car.Price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Car.Price)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Discount)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Discount)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Total)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Customer)
@@ -50,7 +50,14 @@
             @Html.DisplayNameFor(model => model.Car)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Car.Id)
+            @Html.DisplayFor(model => model.Car.CarFullName)
+        </dd>
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Total)
         </dd>
     </dl>
 </div>

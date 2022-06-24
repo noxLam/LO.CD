@@ -26,12 +26,14 @@ namespace LO.CD.Web.Controllers
         // GET: Deals
         public async Task<IActionResult> Index()
         {
+
             var deals = await _context
                                   .Deals
                                   .Include(d => d.Car)
                                   .Include(d => d.Customer)
                                   .Include(d => d.Employee)
                                   .ToListAsync();
+          
             var dealsVM = _mapper.Map<List<Deal>, List<DealsListViewModel>>(deals);
             return View(dealsVM);
 
@@ -57,7 +59,8 @@ namespace LO.CD.Web.Controllers
                 return NotFound();
             }
 
-            return View(deal);
+            var dealVM = _mapper.Map<Deal, DealViewModel>(deal);
+            return View(dealVM);
         }
 
         // GET: Deals/Create
@@ -104,10 +107,12 @@ namespace LO.CD.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Id", deal.CarId);
+            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "CarFullName", deal.CarId);
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName", deal.CustomerId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName", deal.EmployeeId);
-            return View(deal);
+
+            var dealVM = _mapper.Map<Deal, DealEditViewModel>(deal);
+            return View(dealVM);
         }
 
         // POST: Deals/Edit/5
@@ -115,15 +120,16 @@ namespace LO.CD.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DealDate,PaymentMethod,Discount,Total,CustomerId,EmployeeId,CarId")] Deal deal)
+        public async Task<IActionResult> Edit(int id, DealEditViewModel dealVM)
         {
-            if (id != deal.Id)
+            if (id != dealVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var deal = _mapper.Map<DealEditViewModel, Deal>(dealVM);
                 try
                 {
                     _context.Update(deal);
@@ -142,10 +148,10 @@ namespace LO.CD.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Id", deal.CarId);
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName", deal.CustomerId);
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName", deal.EmployeeId);
-            return View(deal);
+            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "CarFullName", dealVM.CarId);
+            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName", dealVM.CustomerId);
+            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName", dealVM.EmployeeId);
+            return View(dealVM);
         }
 
         // GET: Deals/Delete/5
