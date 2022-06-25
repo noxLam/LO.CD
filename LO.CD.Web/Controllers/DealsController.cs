@@ -154,26 +154,7 @@ namespace LO.CD.Web.Controllers
             return View(dealVM);
         }
 
-        // GET: Deals/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Deals == null)
-            {
-                return NotFound();
-            }
-
-            var deal = await _context.Deals
-                .Include(d => d.Car)
-                .Include(d => d.Customer)
-                .Include(d => d.Employee)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (deal == null)
-            {
-                return NotFound();
-            }
-
-            return View(deal);
-        }
+       
 
         // POST: Deals/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -192,6 +173,31 @@ namespace LO.CD.Web.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Search()
+        {
+            var deals = new List<DealsListViewModel>();
+            return View(deals);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            var deals = await _context
+                                .Deals
+                                .Where(deal =>
+                                               deal.Car.Make.Contains(keyword)
+                                               ||
+                                               deal.Customer.PhoneNumber.Contains(keyword)
+                                               ||
+                                               deal.Customer.FirstName.Contains(keyword)
+                                               ||
+                                               deal.Car.Model.Contains(keyword)
+                                             )
+                                .ToListAsync();
+
+            var dealVMs = _mapper.Map<List<Deal>, List<DealsListViewModel>>(deals);
+            return View(dealVMs);
         }
 
         private bool DealExists(int id)

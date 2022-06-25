@@ -1,72 +1,82 @@
 ﻿@model LO.CD.Web.Models.Customers.CustomerDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>Customer</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-    </dl>
-    <hr />
-    <h4>Deals</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Payment Method</th>
-                <th>Total</th>
-                <th>Car</th>
-                <th> </th>    
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var deal in Model.Deals)
-            {
-                <tr>
-                   <td>@deal.DealDate</td>
-                   <td>@deal.PaymentMethod</td>
-                   <td>@deal.Total</td>
-                   <td>@deal.CarId</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+	<h4>Customer</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.FirstName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.FirstName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.LastName)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.LastName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Age)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Age)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PhoneNumber)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PhoneNumber)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Gender)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Gender)
+		</dd>
+	</dl>
+	<hr />
+	<h4>Deals</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Payment Method</th>
+				<th>Total</th>
+				<th>Car</th>
+				<th> </th>
+				<th> </th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var deal in Model.Deals)
+			{
+				<tr>
+					<td>@deal.DealDate</td>
+					<td>@deal.PaymentMethod</td>
+					<td>@deal.Total</td>
+					<td>@deal.CarId</td>
+					<td>
+						<a class="text-decoration-none px-3" asp-controller="Deals" asp-action="Details" asp-route-id="@deal.Id">
+							<i class="fa-solid fa-info"></i>
+						</a>
+					</td>
+				</tr>
+
+
+
+			}
+
+		</tbody>
+	</table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+	<a asp-action="Index">Back to List</a>
 </div>
