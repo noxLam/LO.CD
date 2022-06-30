@@ -8,8 +8,8 @@ namespace LO.CD.Web.Models.Cars
     {
         public int Id { get; set; }
         public string? Make { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
+        public string? Model { get; set; }
+        public int? Year { get; set; }
         public KnownColor Color { get; set; }
 
         [Display(Name = "Fuel Type")]
@@ -18,6 +18,13 @@ namespace LO.CD.Web.Models.Cars
         public string Mileage { get; set; }
         public double? Price { get; set; }
 
-        public string? CarFullname { get; set; }
+        public string? CarFullname 
+        { 
+            get
+            {
+                return $"{Make} {Model} {Year}";
+            }
+        
+        }
     }
 }

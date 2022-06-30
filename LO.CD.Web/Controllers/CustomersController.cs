@@ -44,7 +44,7 @@ namespace LO.CD.Web.Controllers
                                      .Customers
                                      .Include(customer => customer.Deals)
                                      
-                                     
+
                                      .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {

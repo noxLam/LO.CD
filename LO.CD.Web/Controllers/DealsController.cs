@@ -84,10 +84,12 @@ namespace LO.CD.Web.Controllers
                 var deal = _mapper.Map<DealViewModel, Deal>(dealVM);
 
                 deal.DealDate = DateTime.Now;
+                
                 _context.Add(deal);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["CarId"] = new SelectList(_context.Cars, "Id", "CarFullName", dealVM.CarId);
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName", dealVM.CustomerId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName", dealVM.EmployeeId);
@@ -185,6 +187,7 @@ namespace LO.CD.Web.Controllers
         {
             var deals = await _context
                                 .Deals
+                                .Include(deals => deals.Car)
                                 .Where(deal =>
                                                deal.Car.Make.Contains(keyword)
                                                ||

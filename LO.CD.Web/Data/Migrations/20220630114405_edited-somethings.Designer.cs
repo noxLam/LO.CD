@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LO.CD.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220614152318_added-manyto-many")]
-    partial class addedmanytomany
+    [Migration("20220630114405_edited-somethings")]
+    partial class editedsomethings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -53,7 +53,7 @@ namespace LO.CD.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Branch");
+                    b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("LO.CD.Entities.Car", b =>
@@ -64,28 +64,25 @@ namespace LO.CD.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Color")
+                    b.Property<int?>("Color")
                         .HasColumnType("int");
 
-                    b.Property<int>("FuelType")
+                    b.Property<int?>("FuelType")
                         .HasColumnType("int");
 
                     b.Property<string>("Make")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mileage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
+                    b.Property<double?>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("Year")
+                    b.Property<int?>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -141,17 +138,13 @@ namespace LO.CD.Web.Data.Migrations
                     b.Property<DateTime?>("DealDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double?>("Discount")
+                        .HasColumnType("float");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int>("PaymentMethod")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -487,8 +480,7 @@ namespace LO.CD.Web.Data.Migrations
 
             modelBuilder.Entity("LO.CD.Entities.Car", b =>
                 {
-                    b.Navigation("Deal")
-                        .IsRequired();
+                    b.Navigation("Deal");
                 });
 
             modelBuilder.Entity("LO.CD.Entities.Customer", b =>

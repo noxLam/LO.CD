@@ -20,8 +20,8 @@ namespace LO.CD.Web.Models.Deals
 
         [Display(Name ="Payment Medthod")]
         public PaymentMethod PaymentMethod { get; set; }
-        public string? Discount { get; set; }
-        public int Total { get; set; }
+        public double Discount { get; set; }
+        public double? Total { get; set; }
 
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
@@ -38,6 +38,8 @@ namespace LO.CD.Web.Models.Deals
 
         public string? CarFullName { get; set; }
         
+       
+
     }
     
 }

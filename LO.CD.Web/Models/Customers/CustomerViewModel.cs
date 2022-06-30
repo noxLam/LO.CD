@@ -15,7 +15,7 @@ namespace LO.CD.Web.Models.Customers
 
         [Display(Name = "Date of Birth")]
         public DateTime? DOB { get; set; }
-        public int Age { get; set; }
+       /* public int Age { get; set; }*/
 
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }

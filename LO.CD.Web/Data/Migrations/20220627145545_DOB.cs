@@ -4,7 +4,7 @@
 
 namespace LO.CD.Web.Data.Migrations
 {
-    public partial class addedafullname : Migration
+    public partial class DOB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

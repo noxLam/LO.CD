@@ -1,4 +1,5 @@
-﻿using LO.CD.Utils.Enums;
+﻿using LO.CD.Entities;
+using LO.CD.Utils.Enums;
 using LO.CD.Web.Models.Cars;
 using LO.CD.Web.Models.Deals;
 using System.ComponentModel.DataAnnotations;
@@ -28,8 +29,11 @@ namespace LO.CD.Web.Models.Customers
         public string PhoneNumber { get; set; }
         public Gender Gender { get; set; }
 
+        
         public List<CarViewModel>? Cars { get; set; }
         public List<DealViewModel>? Deals { get; set; }
+
+        
         public string? CarFullName { get; set; }
     }
 }
