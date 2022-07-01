@@ -16,7 +16,10 @@ namespace LO.CD.Entities
         public string? Mileage { get; set; }
         public double? Price { get; set; }
 
-        
+        public string? Image { get; set; }
+        public string? Logo { get; set; }
+
+
         public Deal? Deal { get; set; }
 
         [NotMapped]

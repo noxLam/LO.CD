@@ -17,5 +17,7 @@ namespace LO.CD.Web.Models.Customers
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
         public Gender Gender { get; set; }
+
+        
     }
 }
