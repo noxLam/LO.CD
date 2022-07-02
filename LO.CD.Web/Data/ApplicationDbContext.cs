@@ -1,4 +1,5 @@
 ﻿using LO.CD.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,5 +16,7 @@ namespace LO.CD.Web.Data
             : base(options)
         {
         }
+
+      
     }
 }

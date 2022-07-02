@@ -25,8 +25,4 @@
     <ProjectReference Include="..\LO.CD.Utils\LO.CD.Utils.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\img\drivers\" />
-  </ItemGroup>
-
 </Project>

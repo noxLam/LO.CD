@@ -20,6 +20,8 @@ namespace LO.CD.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Gender Gender { get; set; }
+        public string Image { get; set; }
+        public double Sallary { get; set; }
 
         public List<Deal> Deals { get; set; }
 
