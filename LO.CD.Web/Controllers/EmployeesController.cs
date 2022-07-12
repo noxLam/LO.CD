@@ -7,24 +7,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LO.CD.Entities;
 using LO.CD.Web.Data;
+using AutoMapper;
+using LO.CD.Web.Models.Employees;
 
 namespace LO.CD.Web.Controllers
 {
     public class EmployeesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public EmployeesController(ApplicationDbContext context)
+        public EmployeesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-              return _context.Employees != null ? 
-                          View(await _context.Employees.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Employees'  is null.");
+            var employees = await _context
+                                     .Employees
+                                     .Include(e => e.Branches)
+                                     .ToListAsync();
+
+            var employeesVM = _mapper.Map<List<Employee>, List<EmployeesListViewModel>>(employees);
+                 return View(employeesVM);
         }
 
         // GET: Employees/Details/5
@@ -48,7 +56,9 @@ namespace LO.CD.Web.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            return View();
+            var employeeVM = new EmployeeViewModel();
+            employeeVM.MultiSelectBranches = new MultiSelectList(_context.Branches, "Id", "Address");
+            return View(employeeVM);
         }
 
         // POST: Employees/Create
@@ -56,16 +66,23 @@ namespace LO.CD.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Gender,Image")] Employee employee)
+        public async Task<IActionResult> Create(EmployeeViewModel employeeVM)
         {
             if (ModelState.IsValid)
             {
+                var employee = _mapper.Map<EmployeeViewModel, Employee>(employeeVM);
+
+                await AddBranchesToEmployeeAsync(employeeVM, employee);
+
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            employeeVM.MultiSelectBranches = new MultiSelectList(_context.Branches, "Id", "Address", employeeVM.BranchIds);
+            return View(employeeVM);
         }
+
+      
 
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -75,12 +92,21 @@ namespace LO.CD.Web.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context
+                                    .Employees
+                                    .Include(e => e.Branches)
+                                    .SingleAsync(e => e.Id == id);
             if (employee == null)
             {
                 return NotFound();
             }
-            return View(employee);
+            var employeeVM = _mapper.Map<Employee, EmployeeViewModel>(employee);
+
+            employeeVM.BranchIds = employee.Branches.Select(bra => bra.Id).ToList();
+            
+
+            employeeVM.MultiSelectBranches = new MultiSelectList(_context.Branches, "Id", "Address", employeeVM.BranchIds);
+            return View(employeeVM);
         }
 
         // POST: Employees/Edit/5
@@ -88,19 +114,22 @@ namespace LO.CD.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Gender,Image")] Employee employee)
+        public async Task<IActionResult> Edit(int id, EmployeeViewModel employeeVM)
         {
-            if (id != employee.Id)
+            if (id != employeeVM.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var employee = _mapper.Map<EmployeeViewModel, Employee>(employeeVM);
                 try
                 {
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
+
+                    await UpdateBranchesAsync(employeeVM, employee.Id);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -115,7 +144,8 @@ namespace LO.CD.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            employeeVM.MultiSelectBranches = new MultiSelectList(_context.Branches, "Id", "Address", employeeVM.BranchIds);
+            return View(employeeVM);
         }
 
         // GET: Employees/Delete/5
@@ -158,6 +188,35 @@ namespace LO.CD.Web.Controllers
         private bool EmployeeExists(int id)
         {
           return (_context.Employees?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+
+        private async Task AddBranchesToEmployeeAsync(EmployeeViewModel employeeVM, Employee employee)
+        {
+            
+            var branches = await _context
+                                     .Branches
+                                     .Where(bra => employeeVM.BranchIds.Contains(bra.Id))
+                                     .ToListAsync();
+
+            employee.Branches.AddRange(branches);
+        }
+        private async Task UpdateBranchesAsync(EmployeeViewModel employeeVM, int employeeId)
+        {
+            var employee = await _context
+                                 .Employees
+                                 .Include(e => e.Branches)
+                                 .Where(e => e.Id == employeeId)
+                                 .SingleAsync();
+            employee.Branches.Clear();
+            var branches = await _context
+                                     .Branches
+                                     .Where(bra => employeeVM.BranchIds.Contains(bra.Id))
+                                     .ToListAsync();
+
+            employee.Branches.AddRange(branches);
+            _context.Update(employee);
+            await _context.SaveChangesAsync();
         }
     }
 }

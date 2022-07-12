@@ -186,8 +186,8 @@ namespace LO.CD.Web.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Sallary")
-                        .HasColumnType("float");
+                    b.Property<int>("Sallary")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

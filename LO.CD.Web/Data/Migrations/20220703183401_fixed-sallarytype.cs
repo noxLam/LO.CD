@@ -4,16 +4,16 @@
 
 namespace LO.CD.Web.Data.Migrations
 {
-    public partial class addedsallarytoemployee : Migration
+    public partial class fixedsallarytype : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<double>(
+            migrationBuilder.AddColumn<int>(
                 name: "Sallary",
                 table: "Employees",
-                type: "float",
+                type: "int",
                 nullable: false,
-                defaultValue: 0.0);
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

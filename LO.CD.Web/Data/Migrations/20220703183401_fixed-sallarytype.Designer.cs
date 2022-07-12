@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LO.CD.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220702203253_added-sallarytoemployee")]
-    partial class addedsallarytoemployee
+    [Migration("20220703183401_fixed-sallarytype")]
+    partial class fixedsallarytype
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -188,8 +188,8 @@ namespace LO.CD.Web.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Sallary")
-                        .HasColumnType("float");
+                    b.Property<int>("Sallary")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
