@@ -22,10 +22,10 @@ namespace LO.CD.Web.Models.Deals
         public PaymentMethod PaymentMethod { get; set; }
         public double Discount { get; set; }
         public double? Total { get; set; }
-
+        [Display(Name = "Customer")]
         public int CustomerId { get; set; }
         public Customer? Customer { get; set; }
-
+        [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
         public Employee? Employee { get; set; }
 

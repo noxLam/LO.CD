@@ -43,14 +43,19 @@ namespace LO.CD.Web.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var employee = await _context
+                                      .Employees
+                                      .Include(e => e.Branches)
+                                      .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            var employeeVM = _mapper.Map<Employee, EmployeeViewModel>(employee);
+           /* employeeVM.BranchIds = employee.Branches.Select(bra => bra.Id).ToList(); */
+            
+            return View(employeeVM);
         }
 
         // GET: Employees/Create
