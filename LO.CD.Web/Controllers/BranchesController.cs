@@ -9,9 +9,11 @@ using LO.CD.Entities;
 using LO.CD.Web.Data;
 using AutoMapper;
 using LO.CD.Web.Models.Branches;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LO.CD.Web.Controllers
 {
+    [Authorize]
     public class BranchesController : Controller
     {
         private readonly ApplicationDbContext _context;
