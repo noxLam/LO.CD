@@ -28,7 +28,6 @@ namespace LO.CD.Web.Controllers
         {
             var employees = await _context
                                      .Employees
-                                     .Include(e => e.Branches)
                                      .ToListAsync();
 
             var employeesVM = _mapper.Map<List<Employee>, List<EmployeesListViewModel>>(employees);
@@ -154,22 +153,7 @@ namespace LO.CD.Web.Controllers
         }
 
         // GET: Employees/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Employees == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
-        }
+        
 
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]

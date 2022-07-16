@@ -22,7 +22,8 @@ namespace LO.CD.Web.Models.Employees
         public Gender Gender { get; set; }
         public string Image { get; set; }
         public int Sallary { get; set; }
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
+        [Display(Name ="Branch")]
         public List<int> BranchIds { get; set; }
         public List<Branch> Branches { get; set; }
 

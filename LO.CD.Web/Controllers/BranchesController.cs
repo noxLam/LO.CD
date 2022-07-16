@@ -7,43 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LO.CD.Entities;
 using LO.CD.Web.Data;
+using AutoMapper;
+using LO.CD.Web.Models.Branches;
 
 namespace LO.CD.Web.Controllers
 {
     public class BranchesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public BranchesController(ApplicationDbContext context)
+        public BranchesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Branches
         public async Task<IActionResult> Index()
         {
-              return _context.Branches != null ? 
-                          View(await _context.Branches.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Branches'  is null.");
+            var branch = await _context
+                                     .Branches
+                                     .ToListAsync();
+
+                var branchVM = _mapper.Map<List<Branch>, List<BranchViewModel>>(branch);
+                return View(branchVM);
         }
 
         // GET: Branches/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Branches == null)
-            {
-                return NotFound();
-            }
-
-            var branch = await _context.Branches
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (branch == null)
-            {
-                return NotFound();
-            }
-
-            return View(branch);
-        }
+        
 
         // GET: Branches/Create
         public IActionResult Create()
@@ -56,85 +48,29 @@ namespace LO.CD.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Address")] Branch branch)
+        public async Task<IActionResult> Create(BranchViewModel branchVM)
         {
             if (ModelState.IsValid)
             {
+                var branch = _mapper.Map<BranchViewModel, Branch>(branchVM);
+
                 _context.Add(branch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(branch);
+            return View(branchVM);
         }
 
         // GET: Branches/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Branches == null)
-            {
-                return NotFound();
-            }
-
-            var branch = await _context.Branches.FindAsync(id);
-            if (branch == null)
-            {
-                return NotFound();
-            }
-            return View(branch);
-        }
+        
 
         // POST: Branches/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Address")] Branch branch)
-        {
-            if (id != branch.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(branch);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BranchExists(branch.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(branch);
-        }
+        
 
         // GET: Branches/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Branches == null)
-            {
-                return NotFound();
-            }
-
-            var branch = await _context.Branches
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (branch == null)
-            {
-                return NotFound();
-            }
-
-            return View(branch);
-        }
+        
 
         // POST: Branches/Delete/5
         [HttpPost, ActionName("Delete")]
