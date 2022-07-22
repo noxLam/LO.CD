@@ -32,3 +32,17 @@ body {
 .car-logo{
     height: 30px;
 }
+
+.cus-card-img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    
+}
+
+.cus-card{
+    text-align: center;
+    font-weight: lighter;
+    font-style: italic;
+    
+}
