@@ -46,3 +46,26 @@ body {
     font-style: italic;
     
 }
+
+.cus-h{
+    font-family: 'High Tower Text';
+    font-size: x-large;
+    
+}
+
+.spec-img img{
+    height: 100px;
+    width: 200px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.theme-color {
+    background-color: #6D6E72;
+    color: #fff;
+}
+
+.theme-span{
+    font-size: medium;
+    font-weight: bold;
+}
