@@ -37,7 +37,7 @@ body {
     border-radius: 50%;
     width: 150px;
     height: 150px;
-    
+    cursor: pointer;
 }
 
 .cus-card{
@@ -58,6 +58,7 @@ body {
     width: 200px;
     margin-right: 20px;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .theme-color {
@@ -68,4 +69,20 @@ body {
 .theme-span{
     font-size: medium;
     font-weight: bold;
+}
+.block{
+    display: inline-block; 
+}
+
+.cert-del span, h6{
+    font-size: medium;
+    
+}
+
+a:hover{
+    color: green;
+}
+
+.footer-img{
+    width: 150px;
 }
