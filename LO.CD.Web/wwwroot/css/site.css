@@ -86,3 +86,31 @@ a:hover{
 .footer-img{
     width: 150px;
 }
+
+.footer .fac{
+   
+    color: cornsilk;
+}
+.fac i:hover{
+    color: darkblue;
+}
+
+.footer .msn{
+    
+    color: purple;
+}
+.msn i:hover{
+    color: blue;
+}
+
+.footer .em{
+   
+    color: orange;
+}
+.em i:hover{
+    color: burlywood;
+}
+
+.footer i{
+    font-size: 30px;
+}
