@@ -5,28 +5,29 @@
 	ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container view">
+	<h1>Employees List</h1>
 
-<p>
-	<a asp-action="Create">Add New Employee</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.FullName)
-			</th>
+	<p>
+		<a asp-action="Create">Add New Employee</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.FullName)
+				</th>
 
-			<th>
-				@Html.DisplayNameFor(model => model.Gender)
-			</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Gender)
+				</th>
 
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
 			<tr>
 				<td>
 					@Html.DisplayFor(modelItem => item.FullName)
@@ -73,6 +74,7 @@
 					</div>
 				</td>
 			</tr>
-		}
-	</tbody>
-</table>
+			}
+		</tbody>
+	</table>
+</div>

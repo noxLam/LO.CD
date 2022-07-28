@@ -4,39 +4,41 @@
 	ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
+<div class="container view">
 	<h4>Employee</h4>
-	<hr />
-	<dl class="row">
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.FirstName)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.FirstName)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.LastName)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.LastName)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Gender)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Gender)
-		</dd>
-		<dt class="col-sm-2">
-			@Html.DisplayNameFor(model => model.Sallary)
-		</dt>
-		<dd class="col-sm-10">
-			@Html.DisplayFor(model => model.Sallary)
-		</dd>
+	<h1>Details</h1>
+	
+	<div>
 		
+		<hr />
+		<dl class="row">
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.FirstName)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.FirstName)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.LastName)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.LastName)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Gender)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Gender)
+			</dd>
+			<dt class="col-sm-2">
+				@Html.DisplayNameFor(model => model.Sallary)
+			</dt>
+			<dd class="col-sm-10">
+				@Html.DisplayFor(model => model.Sallary)
+			</dd>
 
-		@foreach (var item in Model.Branches)
+
+			@foreach (var item in Model.Branches)
 		{
 			
 				<dt class="col-sm-2">
@@ -48,15 +50,15 @@
 			
 		}
 
-		
-		<div class="col-sm-10">
-			<img class="img-thumbnail" src="~/img/drivers/@Model.Image" alt="@Model.FullName" />
-		</div>
-	</dl>
-</div>
+			<div class="col-sm-10">
+				<img class="img-thumbnail" src="~/img/drivers/@Model.Image" alt="@Model.FullName" />
+			</div>
+		</dl>
+	</div>
 
 
-<div class="mt-3">
-	<a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-	<a class="btn btn-primary" asp-action="Index">Back to List</a>
+	<div class="mt-3">
+		<a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+		<a class="btn btn-primary" asp-action="Index">Back to List</a>
+	</div>
 </div>

@@ -114,3 +114,14 @@ a:hover{
 .footer i{
     font-size: 30px;
 }
+
+.view{
+    padding-top: 30px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+    
+}
+.view h1{
+    font-style: italic;
+    
+}

@@ -2,26 +2,27 @@
 @model IEnumerable<BranchViewModel>
 
 @{
-	ViewData["Title"] = "Index";
+	ViewData["Title"] = "List";
 }
 
-<h1>Index</h1>
+<div class="container view">
+	<h1>Branch List</h1>
 
-<p>
-	<a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.Address)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
+	<p>
+		<a asp-action="Create">Create New</a>
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.Address)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
 			<tr>
 				<td>
 					@Html.DisplayFor(modelItem => item.Address)
@@ -58,6 +59,7 @@
 					</div>
 				</td>
 			</tr>
-		}
-	</tbody>
-</table>
+			}
+		</tbody>
+	</table>
+</div>

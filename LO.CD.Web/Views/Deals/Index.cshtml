@@ -4,39 +4,40 @@
 	ViewData["Title"] = "Index";
 }
 
-<h1>Deals List</h1>
+<div class="container view">
+	<h1>Deals List</h1>
 
-<p>
-	<a asp-action="Create">Create New Deal</a>
-</p>
-<table class="table table-striped table-hover">
-	<thead>
-		<tr>
-			<th>
-				@Html.DisplayNameFor(model => model.DealDate)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.PaymentMethod)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Discount)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Total)
-			</th>
-			<th>
-				@Html.DisplayNameFor(model => model.Customer)
-			</th>
+	<p>
+		<a asp-action="Create">Create New Deal</a>
+	</p>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.DealDate)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.PaymentMethod)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Discount)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Total)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Customer)
+				</th>
 
-			<th>
-				@Html.DisplayNameFor(model => model.Car)
-			</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var item in Model)
-		{
+				<th>
+					@Html.DisplayNameFor(model => model.Car)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
 			<tr>
 				<td>
 					@Html.DisplayFor(modelItem => item.DealDate.Value.Year)
@@ -87,8 +88,8 @@
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
 									<form asp-action="Delete">
 										<input type="text" value="@item.Id" name="id" />
-										<input type="submit" value="Delete" class="btn btn-danger" /> 
-										
+										<input type="submit" value="Delete" class="btn btn-danger" />
+
 									</form>
 								</div>
 							</div>
@@ -96,7 +97,8 @@
 					</div>
 				</td>
 			</tr>
-		}
-	</tbody>
-</table>
-Results: @Model.Count()
+			}
+		</tbody>
+	</table>
+	Results: @Model.Count()
+</div>
