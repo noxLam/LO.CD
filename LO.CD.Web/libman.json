@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "star-rating-svg@3.5.0",
+      "destination": "wwwroot/lib/star-rating-svg/",
+      "files": [
+        "dist/jquery.star-rating-svg.min.js",
+        "src/css/star-rating-svg.css",
+        "src/jquery.star-rating-svg.js",
+        "demo/img/star-rating-svg-logo.png"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootstrap-star-rating@4.1.2",
+      "destination": "wwwroot/lib/bootstrap-star-rating/",
+      "files": [
+        "js/star-rating.min.js",
+        "css/star-rating.min.css",
+        "img/loading.gif",
+        "themes/krajee-svg/theme.min.js",
+        "themes/krajee-svg/theme.min.css"
+      ]
+    }
+  ]
+}

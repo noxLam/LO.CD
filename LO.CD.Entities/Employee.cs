@@ -22,6 +22,7 @@ namespace LO.CD.Entities
         public Gender Gender { get; set; }
         public string Image { get; set; }
         public int Sallary { get; set; }
+        public int Rating { get; set; }
 
         public List<Deal> Deals { get; set; }
 

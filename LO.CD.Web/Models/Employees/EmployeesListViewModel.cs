@@ -16,6 +16,7 @@ namespace LO.CD.Web.Models.Employees
         [Display(Name ="Full Name")]
         public string FullName { get; set; }
         public Gender Gender { get; set; }
+        public int Rating { get; set; }
 
         public List<int> BranchIds { get; set; }
         public List<Branch> Branches { get; set; }

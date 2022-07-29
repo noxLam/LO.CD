@@ -22,6 +22,10 @@
 					@Html.DisplayNameFor(model => model.Gender)
 				</th>
 
+				<th>
+					@Html.DisplayNameFor(model => model.Rating)
+				</th>
+
 				<th></th>
 			</tr>
 		</thead>
@@ -35,6 +39,10 @@
 
 				<td>
 					@Html.DisplayFor(modelItem => item.Gender)
+				</td>
+
+				<td>
+					<input type="text" class="bootstrap-star-rating-readonly" value="@item.Rating">
 				</td>
 
 				<td>

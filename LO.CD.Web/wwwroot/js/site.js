@@ -3,4 +3,17 @@
 
 // Write your JavaScript code.
 
-const carousel = new bootstrap.Carousel('#myCarousel')
+$(document).ready(function () {
+
+    $(".bootstrap-star-rating-readonly").rating({
+        displayOnly: true,
+        showCaption: false,
+        size: "sm"
+    });
+
+    $(".bootstrap-star-rating").rating({
+
+        size: "sm",
+        step: 1
+    });
+});
