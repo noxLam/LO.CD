@@ -47,13 +47,13 @@
 
 				<td>
 					<a class="text-decoration-none px-3 text-dark" asp-action="Edit" asp-route-id="@item.Id">
-						<i class="fa-solid fa-square-pen"></i>
+						<i class="fa-solid fa-square-pen"data-bs-toggle="tooltip" data-bs-title="Edit"></i>
 					</a>
 					<a class="text-decoration-none px-3" asp-action="Details" asp-route-id="@item.Id">
-						<i class="fa-solid fa-info"></i>
+						<i class="fa-solid fa-info"data-bs-toggle="tooltip" data-bs-title="Details"></i>
 					</a>
 					<a class="text-decoration-none px-3 text-danger pointer" data-bs-toggle="modal" data-bs-target="#exampleModal_@item.Id">
-						<i class="fa-solid fa-trash"></i>
+						<i class="fa-solid fa-trash"data-bs-toggle="tooltip" data-bs-title="Delete"></i>
 					</a>
 					<!-- Modal -->
 					<div class="modal fade" id="exampleModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
