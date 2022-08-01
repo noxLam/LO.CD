@@ -125,3 +125,20 @@ a:hover{
     font-style: italic;
     
 }
+
+.theme-card{
+    text-align: center;
+    padding: 20px;
+    
+    
+}
+
+.theme-card .icon i{
+    font-size: 2.9rem;
+    padding: 14px;
+    margin-bottom: 20px;
+    
+}
+.theme-card a:hover{
+    color: gold;
+}

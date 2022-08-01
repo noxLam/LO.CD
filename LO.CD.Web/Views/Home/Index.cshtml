@@ -1,4 +1,7 @@
-﻿@{
+﻿@using LO.CD.Web.Models.Home
+@model HomePageViewModel
+
+@{
 	ViewData["Title"] = "BEBSINCO";
 }
 
@@ -45,6 +48,32 @@
 		<img src="https://images.netdirector.co.uk/gforces-auto/image/upload/q_auto,c_crop,f_auto,fl_lossy,x_0,y_1690,w_8977,h_2990/w_1329,h_443,c_fill/auto-client/6a677b8587f83667316ff4a96f565a38/microsoftteams_image_4_.png" alt="BMW" />
 	</div>
 </div>
+
+<div class="mt-5">
+	<div class="container">
+		<div class="text-center">
+			<h2 class="fw-bold text-uppercase">Top Rated Employees</h2>
+		</div>
+		<div class="row mt-5">
+
+			@foreach(var employee in Model.TopRatedEmloyees)
+			{
+				<div class="col-md-4">
+					<div class="theme-card">
+						<a class="d-block text-decoration-none" asp-controller="Customers" asp-action="Details" asp-route-Id="@employee.Id">
+							<div class="icon">
+								<i class="fa-brands fa-facebook"></i>
+							</div>
+							<h3>@employee.FullName</h3>
+						</a>
+					</div>
+				</div>
+			}
+
+		</div>
+	</div>
+</div>
+
 
 <div class="mt-5">
 	<div class="container">
