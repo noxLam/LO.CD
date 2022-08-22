@@ -6,11 +6,11 @@ namespace LO.CD.Web.Models.Employees
 {
     public class EmployeesListViewModel
     {
-        public EmployeesListViewModel()
+        /*public EmployeesListViewModel()
         {
             Branches = new List<Branch>();
             BranchIds = new List<int>();
-        }
+        }*/
         public int Id { get; set; }
 
         [Display(Name ="Full Name")]
@@ -18,7 +18,7 @@ namespace LO.CD.Web.Models.Employees
         public Gender Gender { get; set; }
         public int Rating { get; set; }
 
-        public List<int> BranchIds { get; set; }
-        public List<Branch> Branches { get; set; }
+        /*public List<int> BranchIds { get; set; }
+        public List<Branch> Branches { get; set; }*/
     }
 }

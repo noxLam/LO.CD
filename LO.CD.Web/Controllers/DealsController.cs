@@ -66,7 +66,9 @@ namespace LO.CD.Web.Controllers
         // GET: Deals/Create
         public IActionResult Create()
         {
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "CarFullName");
+            
+
+            ViewData["CarId"] = new SelectList(_context.Cars.Where(x => x.Deal == null), "Id", "CarFullName");
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName");
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName");
             return View();
@@ -109,7 +111,7 @@ namespace LO.CD.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "CarFullName", deal.CarId);
+            ViewData["CarId"] = new SelectList(_context.Cars.Where(x => x.Deal == null), "Id", "CarFullName", deal.CarId);
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "FirstName", deal.CustomerId);
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "FirstName", deal.EmployeeId);
 
